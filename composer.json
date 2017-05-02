@@ -1,0 +1,35 @@
+{
+  "name": "dabelino/internal-sdk-php",
+  "description": "Official repository of the Dabelino SDK for PHP",
+  "keywords": ["Dabelino", "sdk", "php"],
+  "homepage": "https://github.com/dabelino/internal-sdk-php",
+  "type": "sdk",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Rüdiger Scheumann",
+      "email": "developer@dabelino.de",
+      "homepage": "http://www.dabelino.de"
+    }
+  ],
+  "minimum-stability": "dev",
+  "config": {
+    "vendor-dir": "lib/vendor"
+  },
+  "require": {
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~6.0.8",
+    "squizlabs/php_codesniffer": "2.3.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "de\\dabelino\\sdk\\": "src/class"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.0.x-dev"
+    }
+  }
+}

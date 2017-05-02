@@ -1,6 +1,6 @@
 <?php
 
-namespace de\dabelino\sdk;
+namespace de\dabelino\sdk\model;
 
 class Product
 {
@@ -9,7 +9,7 @@ class Product
     private $teaser = '';
     private $description = '';
     private $pricePerSellingUnit = 0.0;
-    private $recommendedPricePerSellingUnit = 0. *;
+    private $recommendedPricePerSellingUnit = 0.0;
     private $sellingUnit = 0;
     private $sku = '';
     private $ean = '';
@@ -17,17 +17,104 @@ class Product
 
     // region constructor
     public function __construct(
-        string name = '',
-        string teaser = '',
-        string description = '',
-        double pricePerSellingUnit = 0.0,
-        double recommendedPricePerSellingUnit = 0.0,
-        int sellingUnit = 0,
-        string sku = '',
-        string ean = ''
+        string $name,
+        string $teaser,
+        string $description,
+        float $pricePerSellingUnit,
+        float $recommendedPricePerSellingUnit,
+        int $sellingUnit,
+        string $sku,
+        string $ean
     ) {
-
-
+        $this->name = $name;
+        $this->teaser = $teaser;
+        $this->description = $description;
+        $this->pricePerSellingUnit = $pricePerSellingUnit;
+        $this->recommendedPricePerSellingUnit = $recommendedPricePerSellingUnit;
+        $this->sellingUnit = $sellingUnit;
+        $this->sku = $sku;
+        $this->ean = $ean;
     }
     // endregion
+
+    // region get / set
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName(string $value)
+    {
+        $this->name = $value;
+    }
+
+    public function getTeaser()
+    {
+        return $this->teaser;
+    }
+
+    public function setTeaser(string $value)
+    {
+        $this->teaser = $value;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $value)
+    {
+        $this->description = $value;
+    }
+
+    public function getPricePerSellingUnit()
+    {
+        return $this->pricePerSellingUnit;
+    }
+
+    public function setPricePerSellingUnit(float $value)
+    {
+        $this->pricePerSellingUnit = $value;
+    }
+
+    public function getRecommendedPricePerSellingUnit()
+    {
+        return $this->recommendedPricePerSellingUnit;
+    }
+
+    public function setRecommendedPricePerSellingUnit(float $value)
+    {
+        $this->recommendedPricePerSellingUnit = $value;
+    }
+
+    public function getSellingUnit()
+    {
+        return $this->sellingUnit;
+    }
+
+    public function setSellingUnit(int $value)
+    {
+        $this->sellingUnit = $value;
+    }
+
+    public function getSku()
+    {
+        return $this->sku;
+    }
+
+    public function setSku(string $value)
+    {
+        $this->sku = $value;
+    }
+
+    public function getEan()
+    {
+        return $this->ean;
+    }
+
+    public function setEan(string $value)
+    {
+        $this->ean = $value;
+    }
 }

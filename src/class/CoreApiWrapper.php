@@ -2,10 +2,12 @@
 
 namespace de\dabelino\sdk;
 
+use de\dabelino\sdk\model\Product;
+
 class CoreApiWrapper
 {
     // region member
-    private $baseUrl = 'https://api.core.dabelino.pd:5220/v1';
+    private $baseUrl = 'http://api.core.dabelino.pd:5220/v1';
     private $clientCode = '';
     private $username = '';
     private $password = '';
@@ -22,56 +24,76 @@ class CoreApiWrapper
     // endregion
 
     // region methods
-    public function addCustomer() {
+    public function addCustomer()
+    {
 
     }
 
-    public function getCustomer() {
+    public function getCustomer()
+    {
 
     }
 
-    public function setCustomerPassword() {
+    public function setCustomerPassword()
+    {
 
     }
 
-    public function addCustomerAddress() {
+    public function addCustomerAddress()
+    {
 
     }
 
-    public function removeCustomerAddress() {
+    public function removeCustomerAddress()
+    {
 
     }
 
-    public function getCustomerAddressList() {
+    public function getCustomerAddressList()
+    {
 
     }
 
-    public function getCustomerList() {
+    public function getCustomerList()
+    {
 
     }
 
-    public function getCurrentSignedInCustomer() {
+    public function getCurrentSignedInCustomer()
+    {
 
     }
 
-    public function addProduct() {
+    public function addProduct()
+    {
 
     }
 
-    public function getProduct() {
+    public function getProduct()
+    {
 
     }
 
-    public function setProduct() {
+    public function setProduct()
+    {
 
     }
 
-    public function getProductList() {
+    public function getProductList(int $customerGroupId = 0, int $categoryId = 0, string $filter = '')
+    {
         // init
         $result = array();
 
         // action
-        $url = $this->baseUrl.'/products';
+        $getParameter = array(
+            'customerGroupId' => $customerGroupId,
+            'categoryId' => $categoryId,
+            'filter' => $filter
+        );
+        $getParameter = http_build_query($getParameter);
+
+        // url
+        $url = $this->baseUrl.'/products?'.$getParameter;
 
         // setup curl
         $ch = curl_init();
@@ -82,16 +104,19 @@ class CoreApiWrapper
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
         $response = curl_exec($ch);
-
         curl_close($ch);
 
         $response = json_decode($response);
-
         foreach ($response as $productStdClass) {
             $product = new Product(
                 $productStdClass->name,
-                $productStdClass->label,
-                $productStdClass->credits
+                $productStdClass->teaser,
+                $productStdClass->description,
+                (double)$productStdClass->pricePerSellingUnit,
+                (double)$productStdClass->recommendedPricePerSellingUnit,
+                (int)$productStdClass->sellingUnit,
+                $productStdClass->sku,
+                $productStdClass->ean
             );
             array_push($result, $product);
         }
@@ -100,11 +125,13 @@ class CoreApiWrapper
         return $result;
     }
 
-    public function addPurchase() {
+    public function addPurchase()
+    {
 
     }
 
-    public function setPurchaseStatus() {
+    public function setPurchaseStatus()
+    {
 
     }
     // endregion

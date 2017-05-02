@@ -37,6 +37,27 @@ class Product
     }
     // endregion
 
+    // region methods
+    public function getStdClass()
+    {
+        // init
+        $result = new \stdClass();
+
+        // action
+        $result->name = $this->name;
+        $result->teaser = $this->teaser;
+        $result->description = $this->description;
+        $result->pricePerSellingUnit = $this->pricePerSellingUnit;
+        $result->recommendedPricePerSellingUnit = $this->recommendedPricePerSellingUnit;
+        $result->sellingUnit = $this->sellingUnit;
+        $result->sku = $this->sku;
+        $result->ean = $this->ean;
+
+        // return
+        return $result;
+    }
+    // endregion
+
     // region get / set
     public function getName()
     {

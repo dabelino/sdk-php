@@ -2,6 +2,8 @@
 
 namespace de\dabelino\sdk;
 
+use de\dabelino\sdk\model\Category;
+use de\dabelino\sdk\model\CustomerGroup;
 use de\dabelino\sdk\model\Product;
 
 class CoreApiWrapper
@@ -120,6 +122,47 @@ class CoreApiWrapper
                 $productStdClass->ean
             );
             array_push($result, $product);
+        }
+
+        // return
+        return $result;
+    }
+
+    public function getCategoryList(int $customerGroupId = 0, string $filter = '', bool $deep = false)
+    {
+        // init
+        $result = array();
+
+        // action
+        $getParameter = array(
+            'customerGroupId' => $customerGroupId,
+            'filter' => $filter,
+            'deep' => $deep
+        );
+        $getParameter = http_build_query($getParameter);
+
+        // url
+        $url = $this->baseUrl.'/categories?'.$getParameter;
+
+        // setup curl
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Accept: application/json'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $response = json_decode($response);
+        foreach ($response as $categoryStdClass) {
+            $category = new Category(
+                $deep ? new CustomerGroup($categoryStdClass->customerGroup->name) : null,
+                $categoryStdClass->path,
+                $categoryStdClass->name
+            );
+            array_push($result, $category);
         }
 
         // return

@@ -152,4 +152,5 @@ class Product
     {
         $this->ean = $value;
     }
+    // endregion
 }

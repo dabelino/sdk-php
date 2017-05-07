@@ -76,7 +76,7 @@ class Product
             /** @var Category $category */
             foreach ($this->categoryList as $category) {
                 $categoryStdClass = $category->getStdClass();
-                $categoryStdClass->categoryGroup = $category->getCustomerGroup()->getStdClass();
+                $categoryStdClass->customerGroup = $category->getCustomerGroup()->getStdClass();
                 array_push($result->categoryList, $categoryStdClass);
             }
         }

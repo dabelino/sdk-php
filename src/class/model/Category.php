@@ -30,7 +30,7 @@ class Category
 
         // action
         if ( $this->customerGroup != null) {
-            $result->custoemrGroup = $this->customerGroup;
+            $result->customerGroup = $this->customerGroup->getStdClass();
         }
         $result->name = $this->name;
         $result->path = $this->path;

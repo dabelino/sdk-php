@@ -6,19 +6,19 @@ class Category
 {
     // region member
     private $customerGroup = null;
-    private $path = '';
     private $name = '';
+    private $path = '';
     // endregion
 
     // region constructor
     public function __construct(
         CustomerGroup $customerGroup = null,
-        string $path = '',
-        string $name = ''
+        string $name = '',
+        string $path = ''
     ) {
         $this->customerGroup = $customerGroup;
-        $this->path = $path;
         $this->name = $name;
+        $this->path = $path;
     }
     // endregion
 
@@ -32,8 +32,8 @@ class Category
         if ( $this->customerGroup != null) {
             $result->custoemrGroup = $this->customerGroup;
         }
-        $result->path = $this->path;
         $result->name = $this->name;
+        $result->path = $this->path;
 
         // return
         return $result;
@@ -51,15 +51,6 @@ class Category
         $this->customerGroup = $value;
     }
 
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    public function setPath(string $value)
-    {
-        $this->path = $value;
-    }
 
     public function getName()
     {
@@ -69,6 +60,15 @@ class Category
     public function setName(string $value)
     {
         $this->name = $value;
+    }
+
+    public function getPath()
+    {
+        return $this->path;
+    }
+    public function setPath(string $value)
+    {
+        $this->path = $value;
     }
     // endregion
 }

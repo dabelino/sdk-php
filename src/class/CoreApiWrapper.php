@@ -126,7 +126,8 @@ class CoreApiWrapper
                             new CustomerGroup(
                                 $categoryStdClass->customerGroup->name
                             ),
-                            $categoryStdClass->name
+                            $categoryStdClass->name,
+                            $categoryStdClass->path
                         )
                     );
                 }

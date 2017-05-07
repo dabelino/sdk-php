@@ -4,7 +4,9 @@ namespace de\dabelino\sdk;
 
 use de\dabelino\sdk\model\Category;
 use de\dabelino\sdk\model\CustomerGroup;
+use de\dabelino\sdk\model\Image;
 use de\dabelino\sdk\model\Product;
+use de\dabelino\sdk\model\Tag;
 
 class CoreApiWrapper
 {
@@ -81,8 +83,12 @@ class CoreApiWrapper
 
     }
 
-    public function getProductList(int $customerGroupId = 0, int $categoryId = 0, string $filter = '')
-    {
+    public function getProductList(
+        int $customerGroupId = 0,
+        int $categoryId = 0,
+        string $filter = '',
+        bool $deep = false
+    ) {
         // init
         $result = array();
 
@@ -90,7 +96,8 @@ class CoreApiWrapper
         $getParameter = array(
             'customerGroupId' => $customerGroupId,
             'categoryId' => $categoryId,
-            'filter' => $filter
+            'filter' => $filter,
+            'deep' => $deep
         );
         $getParameter = http_build_query($getParameter);
 
@@ -110,7 +117,43 @@ class CoreApiWrapper
 
         $response = json_decode($response);
         foreach ($response as $productStdClass) {
+            $categoryList = array();
+            foreach ($productStdClass->categoryList as $categoryStdClass) {
+                array_push(
+                    $categoryList,
+                    new Category(
+                        new CustomerGroup(
+                            $categoryStdClass->customerGroup->name
+                        ),
+                        $categoryStdClass->name
+                    )
+                );
+            }
+
+            $imageList = array();
+            foreach ($productStdClass->imageList as $imageStdClass) {
+                array_push(
+                    $imageList,
+                    new Image(
+                        $imageStdClass->name,
+                        $imageStdClass->title,
+                        $imageStdClass->file
+                    )
+                );
+            }
+
+            $tagList = array();
+            foreach ($productStdClass->tagList as $tagStdClass) {
+                array_push(
+                    $tagList,
+                    new Tag(
+                        $tagStdClass->name
+                    )
+                );
+            }
+
             $product = new Product(
+                $deep ? new CustomerGroup($productStdClass->customerGroup->name) : null,
                 $productStdClass->path,
                 $productStdClass->name,
                 $productStdClass->teaser,
@@ -119,7 +162,10 @@ class CoreApiWrapper
                 (double)$productStdClass->recommendedPricePerSellingUnit,
                 (int)$productStdClass->sellingUnit,
                 $productStdClass->sku,
-                $productStdClass->ean
+                $productStdClass->ean,
+                $deep ? $categoryList : null,
+                $deep ? $imageList : null,
+                $deep ? $tagList : null
             );
             array_push($result, $product);
         }

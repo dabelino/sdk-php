@@ -5,6 +5,7 @@ namespace de\dabelino\sdk\model;
 class Product
 {
     // region member
+    private $customerGroup = null;
     private $path = '';
     private $name = '';
     private $teaser = '';
@@ -14,10 +15,14 @@ class Product
     private $sellingUnit = 0;
     private $sku = '';
     private $ean = '';
+    private $categoryList = array();
+    private $imageList = array();
+    private $tagList = array();
     // endregion
 
     // region constructor
     public function __construct(
+        CustomerGroup $customerGroup = null,
         string $path,
         string $name,
         string $teaser,
@@ -26,8 +31,12 @@ class Product
         float $recommendedPricePerSellingUnit,
         int $sellingUnit,
         string $sku,
-        string $ean
+        string $ean,
+        array $categoryList = array(),
+        array $imageList = array(),
+        array $tagList = array()
     ) {
+        $this->customerGroup = $customerGroup;
         $this->path = $path;
         $this->name = $name;
         $this->teaser = $teaser;
@@ -37,6 +46,9 @@ class Product
         $this->sellingUnit = $sellingUnit;
         $this->sku = $sku;
         $this->ean = $ean;
+        $this->categoryList = $categoryList;
+        $this->imageList = $imageList;
+        $this->tagList = $tagList;
     }
     // endregion
 
@@ -47,6 +59,9 @@ class Product
         $result = new \stdClass();
 
         // action
+        if ($this->customerGroup != null) {
+            $result->custoemrGroup = $this->customerGroup;
+        }
         $result->path = $this->path;
         $result->name = $this->name;
         $result->teaser = $this->teaser;
@@ -63,6 +78,16 @@ class Product
     // endregion
 
     // region get / set
+    public function getCustomerGroup()
+    {
+        return $this->customerGroup;
+    }
+
+    public function setCustomerGroup(string $value)
+    {
+        $this->customerGroup = $value;
+    }
+
     public function getPath()
     {
         return $this->path;
@@ -151,6 +176,36 @@ class Product
     public function setEan(string $value)
     {
         $this->ean = $value;
+    }
+
+    public function getCategoryList()
+    {
+        return $this->categoryList;
+    }
+
+    public function setCategoryList(array $value)
+    {
+        $this->categoryList = $value;
+    }
+
+    public function getImageList()
+    {
+        return $this->imageList;
+    }
+
+    public function setImageList(array $value)
+    {
+        $this->imageList = $value;
+    }
+
+    public function getTagList()
+    {
+        return $this->tagList;
+    }
+
+    public function setTagList(array $value)
+    {
+        $this->tagList = $value;
     }
     // endregion
 }

@@ -71,6 +71,15 @@ class Product
         $result->sellingUnit = $this->sellingUnit;
         $result->sku = $this->sku;
         $result->ean = $this->ean;
+        if ($this->categoryList != null) {
+            $result->categoryList = array();
+            /** @var Category $category */
+            foreach ($this->categoryList as $category) {
+                $categoryStdClass = $category->getStdClass();
+                $categoryStdClass->categoryGroup = $category->getCustomerGroup()->getStdClass();
+                array_push($result->categoryList, $categoryStdClass);
+            }
+        }
 
         // return
         return $result;

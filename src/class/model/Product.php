@@ -80,6 +80,20 @@ class Product
                 array_push($result->categoryList, $categoryStdClass);
             }
         }
+        if ($this->imageList != null) {
+            $result->imageList = array();
+            /** @var Image $image */
+            foreach ($this->imageList as $image) {
+                array_push($result->imageList, $image->getStdClass());
+            }
+        }
+        if ($this->tagList != null) {
+            $result->tagList = array();
+            /** @var Image $tag */
+            foreach ($this->tagList as $tag) {
+                array_push($result->tagList, $tag->getStdClass());
+            }
+        }
 
         // return
         return $result;

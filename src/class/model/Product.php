@@ -5,6 +5,7 @@ namespace de\dabelino\sdk\model;
 class Product
 {
     // region member
+    private $path = '';
     private $name = '';
     private $teaser = '';
     private $description = '';
@@ -17,6 +18,7 @@ class Product
 
     // region constructor
     public function __construct(
+        string $path,
         string $name,
         string $teaser,
         string $description,
@@ -26,6 +28,7 @@ class Product
         string $sku,
         string $ean
     ) {
+        $this->path = $path;
         $this->name = $name;
         $this->teaser = $teaser;
         $this->description = $description;
@@ -44,6 +47,7 @@ class Product
         $result = new \stdClass();
 
         // action
+        $result->path = $this->path;
         $result->name = $this->name;
         $result->teaser = $this->teaser;
         $result->description = $this->description;
@@ -59,6 +63,16 @@ class Product
     // endregion
 
     // region get / set
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    public function setPath(string $value)
+    {
+        $this->path = $value;
+    }
+
     public function getName()
     {
         return $this->name;

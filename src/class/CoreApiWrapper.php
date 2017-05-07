@@ -109,6 +109,7 @@ class CoreApiWrapper
         $response = json_decode($response);
         foreach ($response as $productStdClass) {
             $product = new Product(
+                $productStdClass->path,
                 $productStdClass->name,
                 $productStdClass->teaser,
                 $productStdClass->description,

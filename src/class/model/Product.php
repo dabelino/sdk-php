@@ -60,7 +60,7 @@ class Product
 
         // action
         if ($this->customerGroup != null) {
-            $result->customerGroup = $this->customerGroup;
+            $result->customerGroup = $this->customerGroup->getStdClass();
         }
         $result->path = $this->path;
         $result->name = $this->name;

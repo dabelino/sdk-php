@@ -137,6 +137,7 @@ class CoreApiWrapper
                     array_push(
                         $imageList,
                         new Image(
+                            $imageStdClass->id,
                             $imageStdClass->name,
                             $imageStdClass->title,
                             $imageStdClass->file

@@ -5,6 +5,7 @@ namespace de\dabelino\sdk\model;
 class Image
 {
     // region member
+    private $id = 0;
     private $name = '';
     private $title = '';
     private $file = '';
@@ -12,10 +13,12 @@ class Image
 
     // region constructor
     public function __construct(
+        int $id,
         string $name,
         string $title,
         string $file
     ) {
+        $this->id = $id;
         $this->name = $name;
         $this->title = $title;
         $this->file = $file;
@@ -29,6 +32,7 @@ class Image
         $result = new \stdClass();
 
         // action
+        $result->id = $this->id;
         $result->name = $this->name;
         $result->title = $this->title;
         $result->file = $this->file;
@@ -47,6 +51,16 @@ class Image
     public function setName(string $value)
     {
         $this->name = $value;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId(string $value)
+    {
+        $this->id = $value;
     }
 
     public function getTitle()

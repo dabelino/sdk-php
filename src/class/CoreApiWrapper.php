@@ -117,39 +117,41 @@ class CoreApiWrapper
 
         $response = json_decode($response);
         foreach ($response as $productStdClass) {
-            $categoryList = array();
-            foreach ($productStdClass->categoryList as $categoryStdClass) {
-                array_push(
-                    $categoryList,
-                    new Category(
-                        new CustomerGroup(
-                            $categoryStdClass->customerGroup->name
-                        ),
-                        $categoryStdClass->name
-                    )
-                );
-            }
+            if ( $deep ) {
+                $categoryList = array();
+                foreach ($productStdClass->categoryList as $categoryStdClass) {
+                    array_push(
+                        $categoryList,
+                        new Category(
+                            new CustomerGroup(
+                                $categoryStdClass->customerGroup->name
+                            ),
+                            $categoryStdClass->name
+                        )
+                    );
+                }
 
-            $imageList = array();
-            foreach ($productStdClass->imageList as $imageStdClass) {
-                array_push(
-                    $imageList,
-                    new Image(
-                        $imageStdClass->name,
-                        $imageStdClass->title,
-                        $imageStdClass->file
-                    )
-                );
-            }
+                $imageList = array();
+                foreach ($productStdClass->imageList as $imageStdClass) {
+                    array_push(
+                        $imageList,
+                        new Image(
+                            $imageStdClass->name,
+                            $imageStdClass->title,
+                            $imageStdClass->file
+                        )
+                    );
+                }
 
-            $tagList = array();
-            foreach ($productStdClass->tagList as $tagStdClass) {
-                array_push(
-                    $tagList,
-                    new Tag(
-                        $tagStdClass->name
-                    )
-                );
+                $tagList = array();
+                foreach ($productStdClass->tagList as $tagStdClass) {
+                    array_push(
+                        $tagList,
+                        new Tag(
+                            $tagStdClass->name
+                        )
+                    );
+                }
             }
 
             $product = new Product(

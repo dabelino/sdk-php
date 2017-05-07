@@ -32,9 +32,9 @@ class Product
         int $sellingUnit,
         string $sku,
         string $ean,
-        array $categoryList = array(),
-        array $imageList = array(),
-        array $tagList = array()
+        array $categoryList = null,
+        array $imageList = null,
+        array $tagList = null
     ) {
         $this->customerGroup = $customerGroup;
         $this->path = $path;

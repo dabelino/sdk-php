@@ -209,8 +209,8 @@ class CoreApiWrapper
         foreach ($response as $categoryStdClass) {
             $category = new Category(
                 $deep ? new CustomerGroup($categoryStdClass->customerGroup->name) : null,
-                $categoryStdClass->path,
-                $categoryStdClass->name
+                $categoryStdClass->name,
+                $categoryStdClass->path
             );
             array_push($result, $category);
         }
